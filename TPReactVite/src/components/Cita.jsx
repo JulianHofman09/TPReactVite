@@ -1,5 +1,6 @@
 import "./Cita.css";
-function Cita({ cita, index, citas, setCitas }) {
+
+function Cita(props) {
 
   const handleEliminar = () => {
     const confirmar = confirm("¿Eliminar esta cita?");
@@ -7,23 +8,23 @@ function Cita({ cita, index, citas, setCitas }) {
     if (confirmar) {
       const nuevaLista = [];
 
-      for (let i = 0; i < citas.length; i++) {
-        if (i !== index) {
-          nuevaLista.push(citas[i]);
+      for (let i = 0; i < props.citas.length; i++) {
+        if (i !== props.index) {
+          nuevaLista.push(props.citas[i]);
         }
       }
 
-      setCitas(nuevaLista);
+      props.setCitas(nuevaLista);
     }
   };
 
   return (
     <div className="cita">
-      <p>Mascota: <span>{cita.mascota}</span></p>
-      <p>Dueño: <span>{cita.propietario}</span></p>
-      <p>Fecha: <span>{cita.fecha}</span></p>
-      <p>Hora: <span>{cita.hora}</span></p>
-      <p>Sintomas: <span>{cita.sintomas}</span></p>
+      <p>Mascota: <span>{props.cita.mascota}</span></p>
+      <p>Dueño: <span>{props.cita.propietario}</span></p>
+      <p>Fecha: <span>{props.cita.fecha}</span></p>
+      <p>Hora: <span>{props.cita.hora}</span></p>
+      <p>Sintomas: <span>{props.cita.sintomas}</span></p>
       <button className="button eliminar u-full-width" onClick={handleEliminar}>
         Eliminar ×
       </button>
