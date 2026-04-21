@@ -7,31 +7,48 @@ function Formulario(props) {
   const [fecha, setFecha] = useState("");
   const [hora, setHora] = useState("");
   const [sintomas, setSintomas] = useState("");
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    const nuevaCita = {
-      mascota: mascota,
-      propietario: propietario,
-      fecha: fecha,
-      hora: hora,
-      sintomas: sintomas
-    };
+  // VALIDACIÓN
+  if (
+    mascota.trim() === "" ||
+    propietario.trim() === "" ||
+    fecha.trim() === "" ||
+    hora.trim() === "" ||
+    sintomas.trim() === ""
+  ) {
+    setError(true);
+    return;
+  }
 
-    const nuevaLista = props.citas.concat(nuevaCita);
-    props.setCitas(nuevaLista);
+  setError(false);
 
-    setMascota("");
-    setPropietario("");
-    setFecha("");
-    setHora("");
-    setSintomas("");
+  const nuevaCita = {
+    mascota,
+    propietario,
+    fecha,
+    hora,
+    sintomas
   };
+
+  const nuevaLista = props.citas.concat(nuevaCita);
+  props.setCitas(nuevaLista);
+
+
+  setMascota("");
+  setPropietario("");
+  setFecha("");
+  setHora("");
+  setSintomas("");
+};
 
   return (
     <>
       <h2>Crear mi Cita</h2>
+      {error && <p className="alerta-error">Todos los campos son obligatorios</p>}
       <form onSubmit={handleSubmit}>
 
         <label>Nombre Mascota</label>
